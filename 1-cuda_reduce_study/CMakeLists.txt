@@ -68,3 +68,12 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     # 2. 修复了生成器表达式的拼写和符号错误
     target_compile_options(my_reduce_v5_unroll_last_warp PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-G>)
 endif()
+
+# 添加可执行文件
+add_executable(my_reduce_v6_completely_unroll my_reduce_v6_completely_unroll.cu)
+# 1. 修复了拼写错误和链接方式，直接使用 CUDAToolkit 提供的 CUDA::cublas
+target_link_libraries(my_reduce_v6_completely_unroll PRIVATE CUDA::cudart CUDA::cublas)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    # 2. 修复了生成器表达式的拼写和符号错误
+    target_compile_options(my_reduce_v6_completely_unroll PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-G>)
+endif()
