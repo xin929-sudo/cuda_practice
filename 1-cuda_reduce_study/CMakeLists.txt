@@ -89,11 +89,16 @@ endif()
 
 # 添加可执行文件
 add_executable(my_reduce_v8_shuffle my_reduce_v8_shuffle.cu)
-# 1. 修复了拼写错误和链接方式，直接使用 CUDAToolkit 提供的 CUDA::cublas
+
+# 链接库
 target_link_libraries(my_reduce_v8_shuffle PRIVATE CUDA::cudart CUDA::cublas)
+
+# --- 终极修改：使用 89-real，彻底禁止生成 PTX，杜绝 JIT 编译 ---
+# set_target_properties(my_reduce_v8_shuffle PROPERTIES CUDA_ARCHITECTURES "89-real")
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    # 2. 修复了生成器表达式的拼写和符号错误
-    target_compile_options(my_reduce_v8_shuffle PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-G>)
+    # 保持这里的调试信息标志不变
+    target_compile_options(my_reduce_v8_shuffle PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-g;-G>)
 endif()
 
 

@@ -37,7 +37,7 @@ template <unsigned int NUM_PER_BLOCK,unsigned int NUM_PER_THREAD>
 __global__ void reduce(float *d_input, float *d_output) {
     // 先把数据读到 共享内存里面，这样一个block里面都是共享的
     int tid = threadIdx.x;
-    __shared__ float shared[THREAD_PER_BLOCK];
+    // __shared__ float shared[THREAD_PER_BLOCK];
     // 1.获取每个block要处理数据的起始数组
     // 解决 idle 线程，线程一个线程需要处理原来的 NUM_PER_BLOCK倍
     float *input_start = d_input + blockIdx.x  * NUM_PER_BLOCK;
@@ -89,7 +89,7 @@ bool check(const float * a, const float *b, int N) {
 }
 
 int main() {
-    printf("my_reduce_v7_multi_add\n");
+    printf("my_reduce_v8_shuffle\n");
     const int N = 32 * 1024 * 1024;
     // cpu
     constexpr int block_num = 1024;
