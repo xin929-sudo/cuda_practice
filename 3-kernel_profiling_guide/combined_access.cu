@@ -75,31 +75,31 @@ int main()
         add1<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
         cudaDeviceSynchronize();
     }
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     add2<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
-    //     cudaDeviceSynchronize();
-    // }
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     add3<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
-    //     cudaDeviceSynchronize();
-    // }
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     add4<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
-    //     cudaDeviceSynchronize();
-    // }
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     add5<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
-    //     cudaDeviceSynchronize();
-    // }
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     add6<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
-    //     cudaDeviceSynchronize();
-    // }
+    for (int i = 0; i < 2; i++)
+    {
+        add2<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
+        cudaDeviceSynchronize();
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        add3<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
+        cudaDeviceSynchronize();
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        add4<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
+        cudaDeviceSynchronize();
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        add5<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
+        cudaDeviceSynchronize();
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        add6<<<Grid, Block>>>(d_input_x, d_input_y, d_output);
+        cudaDeviceSynchronize();
+    }
 
     cudaFree(d_input_x);
     cudaFree(d_input_y);
