@@ -101,4 +101,18 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_options(my_reduce_v8_shuffle PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-g;-G>)
 endif()
 
+# 添加可执行文件
+add_executable(my_reduce_v2_no_divergence_branch_2 my_reduce_v2_no_divergence_branch_2.cu)
+
+# 链接库
+target_link_libraries(my_reduce_v2_no_divergence_branch_2 PRIVATE CUDA::cudart CUDA::cublas)
+
+# --- 终极修改：使用 89-real，彻底禁止生成 PTX，杜绝 JIT 编译 ---
+# set_target_properties(my_reduce_v8_shuffle PROPERTIES CUDA_ARCHITECTURES "89-real")
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    # 保持这里的调试信息标志不变
+    target_compile_options(my_reduce_v2_no_divergence_branch_2 PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-g;-G>)
+endif()
+
 
